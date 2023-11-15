@@ -1,7 +1,7 @@
 /// @description
-var l = instance_create_depth(x,y,depth,obj_line_hitbox)
-l.x2 = x + 128
-l.max_damage = 25
-l.player_to_hit = obj_player
-with(l) event_user(0)
-alarm[0] = 60
+var weapon = weapons_list[weapon_selected]
+create_bullet_tracer(x, y, depth, weapon, weapon.max_distance, image_angle, obj_other_player, obj_player)
+var snd = asset_get_index(weapon.shoot_sound)
+audio_play_sound_at(snd,x,y,0,0,64,1,false,0)
+muzzle_anim = 0
+alarm[0] = irandom_range(60,120)

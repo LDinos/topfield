@@ -6,7 +6,8 @@ function reload(weapon){
 			{
 				audio_listener_position(x, y, 0);
 				reloading = true
-				audio_play_sound_at(weapon.reload_sound,x,y,0,0,64,1,false,0)
+				var snd = asset_get_index(weapon.reload_sound)
+				audio_play_sound_at(snd,x,y,0,0,64,1,false,0)
 				weapon.current_reload = weapon.reload_time
 			}
 		}

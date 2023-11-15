@@ -13,6 +13,7 @@ function spawn(){
 		obj_player.x = spawner._x
 		obj_player.y = spawner._y
 		obj_player.status = ALIVE
+		obj_player.player_health = 100
 	}
 
 }

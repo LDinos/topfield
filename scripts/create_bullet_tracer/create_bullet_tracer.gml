@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function create_bullet_tracer(_x, _y, _depth, weapon, max_distance, angle, shooter_id){
+function create_bullet_tracer(_x, _y, _depth, weapon, max_distance, angle, shooter_id, victim_id){
 	var l = instance_create_depth(_x,_y,_depth,obj_line_hitbox)
 		l.max_damage = weapon.max_damage
 		l.damage_curve = weapon.damage_dropoff
@@ -8,5 +8,6 @@ function create_bullet_tracer(_x, _y, _depth, weapon, max_distance, angle, shoot
 		l.angle = angle
 		l.bullet_hole_size = weapon.bullet_hole_size
 		l.shooter = shooter_id
-		with(l) event_user(0)
+		l.player_to_hit = victim_id
+		with(l) check_collision()
 }

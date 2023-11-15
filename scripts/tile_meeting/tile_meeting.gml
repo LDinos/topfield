@@ -1,4 +1,4 @@
-function tile_meeting(xx, yy, tilemap){
+function tile_meeting(xx, yy, tilemap, subdivisions = 3){
 	
 ///@arg x
 ///@arg y
@@ -14,13 +14,20 @@ x = xx;
 y = yy;
 
 //check for collision on all four corners of the collision mask
-meeting =		tilemap_get_at_pixel(tilemap, bbox_right, bbox_top)
-				||
-				tilemap_get_at_pixel(tilemap, bbox_right, bbox_bottom)
-				||
-				tilemap_get_at_pixel(tilemap, bbox_left, bbox_top)
-				||
-				tilemap_get_at_pixel(tilemap, bbox_left, bbox_bottom);
+for(var i = 0; i <= subdivisions; i++) {
+	var ypos = lerp(bbox_bottom, bbox_top, i/subdivisions)
+	var xcenter = (bbox_right - bbox_left)/2
+	meeting =		tilemap_get_at_pixel(tilemap, bbox_left, ypos)
+					||
+					tilemap_get_at_pixel(tilemap, bbox_right, ypos)
+					||
+					tilemap_get_at_pixel(tilemap, bbox_left + xcenter, ypos)
+	if (meeting) {
+		x = xp;
+		y = yp;
+		return(meeting);
+	}
+}
 
 //Move back to the original position
 x = xp;
